@@ -9,6 +9,10 @@ class TestIsbnChecker < Minitest::Test
 		assert_equal(false, valid_isbn?("12345678912345"))
 	end
 
+	def test_remove_spaces_and_hyphens
+		assert_equal("123456", remove_invalid_characters("123456"))
+	end	
+
 	def test_valid_isbn10_returns_true
 		assert_equal(true, valid_isbn?("0471958697"))
 	end
@@ -74,30 +78,29 @@ class TestIsbnChecker < Minitest::Test
 	end	
 
 	def test_isbn_10_containing_x
-		assert_equal(true, isbn_10_containing_x?("877195869x"))
-		assert_equal(false, isbn_10_containing_x?("877195869@"))
-		assert_equal(false, isbn_10_containing_x?("7987022-78962-ds-22"))
+		assert_equal(true, isbn_10_math?("877195869x"))
+		assert_equal(false, isbn_10_math?("877195869@"))
+		assert_equal(false, isbn_10_math?("7987022-78962-ds-22"))
 	end
 
 	def test_invalid_isbn_characters
 		assert_equal(false, valid_isbn?("4780470059029"))
 		assert_equal(false, valid_isbn?("0-321@14653-0"))
 		assert_equal(false, valid_isbn?("-"))
+		assert_equal(false, valid_isbn?("978-O-13-149505-0"))
+		assert_equal(false, valid_isbn?("877195x869"))
+		assert_equal(false, valid_isbn?("8771958697"))
 	end		
 
 	def test_valid_isbn_characters
 		assert_equal(true, valid_isbn?("978-0-13-149505-0"))
 		assert_equal(true, valid_isbn?("978 0 471 48648 0"))
 		assert_equal(true, valid_isbn?("0-321-14653-0"))
+		assert_equal(true, valid_isbn?("877195869x"))
 	end	
 
 	def test_if_isbn_has_non_numerical_characters
 		assert_equal(true, contains_non_numerical_characters?("877195x869"))
 	end	
-
-	def test_invalid_characters_in_isbn
-		assert_equal(false, x_not_last_element?("877195x869"))
-		assert_equal(false, x_not_last_element?("321$56789x"))
-
-	end	
+		
 end

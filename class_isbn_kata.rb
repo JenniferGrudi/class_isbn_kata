@@ -1,11 +1,11 @@
 def valid_isbn?(input_string)
-	remove_invalid_characters(input_string)
-	correct_length?(input_string)
+	string_without_spaces_and_hyphens = remove_invalid_characters(input_string)
+	correct_length?(string_without_spaces_and_hyphens)
 end
 
 def remove_invalid_characters(input_string)
-	input_string.delete!(" ")
-	input_string.delete!("-")
+	string_without_spaces = input_string.delete(" ")
+	delete_hyphens_without_spaces = string_without_spaces.delete("-")
 end
 
 def contains_non_numerical_characters?(string)
@@ -16,19 +16,12 @@ def contains_non_numerical_characters?(string)
     end    
 end
 
-def x_not_last_element?(string)
-	if string[0...8] =~/\D/ 
-		false
-	else
-		true	
-	end	
-end	
-
 def correct_length?(input_string)
-	if input_string.length == 10 	
-		true
-	elsif input_string.length == 13 && isbn13_math?(input_string)
-		true
+	if input_string.length == 10 && contains_non_numerical_characters?(input_string[0...8]) == false 	
+		isbn_10_math?(input_string)
+	elsif input_string.length == 13 && contains_non_numerical_characters?(input_string) == false
+		 isbn13_math?(input_string)
+		
 	else	
 		false
 	end
@@ -49,7 +42,7 @@ def isbn_10_mod_11(number)
 	checksum = number%11
 end
 
-def isbn_10_containing_x?(number)
+def isbn_10_math?(number)
 	sum = isbn_10(number)
 	checksum = isbn_10_mod_11(sum)
 	if checksum == 10 && number[-1].upcase == "X"
