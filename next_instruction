@@ -1,0 +1,23 @@
+When you have your ISBN program working, then please extend it so that it can read potential ISBN numbers from a file, check if they are valid, and then write to a new file the tested ISBN numbers together with whether each one is valid or not. 
+
+Attached is a file with a different string on each line. You need to check the string on each line to see if it is valid or not. The output file should have the corresponding number of lines, with the original strings and next to each, separated by a comma, whether it is a valid ISBN or not. e.g. if the first line of the input file contains the invalid ISBN string "1234567890", then the first line of the output file should read "1234567890", "invalid"; if the second line contains the valid ISBN string "9780470059029", then the second line of the output file should read "9780470059029", "valid".
+
+ITEM, ISBN
+1, 9780470059029
+2, 4780470059029
+3, 978 0 471 48648 0
+4, 978-0596809485
+5, 978-0-13-149505-0
+6, 978-0-262-13472-9
+7, 7465905
+8, 00000000
+9, 7987022-78962-ds-22
+10, 0471958697
+11, 0 471 60695 2
+12, 0-470-84525-2
+13, 0-321-14653-0
+14, 877195869x
+15, 877195x869
+16, 
+17, 877195869xx
+18, 877195@869x
